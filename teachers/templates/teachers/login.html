@@ -1,0 +1,30 @@
+{% extends 'teachers/signup_or_login.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+<style>
+    #login {
+        width: 100px;
+    }
+
+    form {
+        padding: 0px 200px 0px 200px;
+    }
+
+    hr {
+        width: 800px;
+    }
+</style>
+<div class="container">
+<div class="container">  
+<div class="jumbotron text-center h-100">
+    <h1>Log in here!</h1>
+    <hr class="my-4">
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input id="login" type="submit" value="Log In" class="btn btn-info">
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

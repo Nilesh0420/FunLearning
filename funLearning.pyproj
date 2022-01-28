@@ -1,0 +1,158 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>funLearning</Name>
+    <RootNamespace>funLearning</RootNamespace>
+    <InterpreterId>CondaEnv|CondaEnv|myDjangoEnv</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>8c78d9a1-39ec-4fd0-a956-adb1f732b1e1</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>funLearning.settings</DjangoSettingsModule>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="funLearning\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="manage.py" />
+    <Compile Include="funLearning\__init__.py" />
+    <Compile Include="funLearning\settings.py" />
+    <Compile Include="funLearning\urls.py" />
+    <Compile Include="funLearning\wsgi.py" />
+    <Compile Include="students\admin.py" />
+    <Compile Include="students\apps.py" />
+    <Compile Include="students\migrations\__init__.py" />
+    <Compile Include="students\models.py" />
+    <Compile Include="students\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="students\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="students\tests.py" />
+    <Compile Include="students\views.py" />
+    <Compile Include="students\__init__.py" />
+    <Compile Include="teachers\admin.py" />
+    <Compile Include="teachers\apps.py" />
+    <Compile Include="teachers\models.py" />
+    <Compile Include="teachers\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="teachers\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="teachers\tests.py" />
+    <Compile Include="teachers\views.py" />
+    <Compile Include="teachers\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="requirements.txt" />
+    <Content Include="static\images\Logo.png" />
+    <Content Include="static\images\LogoForBrowser.png" />
+    <Content Include="students\templates\students\about_page.html" />
+    <Content Include="students\templates\students\home_page.html" />
+    <Content Include="students\templates\students\login.html" />
+    <Content Include="students\templates\students\signup.html" />
+    <Content Include="students\templates\students\signup_or_login.html" />
+    <Content Include="students\templates\students\user_home.html" />
+    <Content Include="students\templates\students\profile.html" />
+    <Content Include="teachers\templates\teachers\about_page.html" />
+    <Content Include="teachers\templates\teachers\home_page.html" />
+    <Content Include="teachers\templates\teachers\login.html" />
+    <Content Include="teachers\templates\teachers\profile.html" />
+    <Content Include="teachers\templates\teachers\question_confirm_delete.html" />
+    <Content Include="teachers\templates\teachers\question_detail.html" />
+    <Content Include="teachers\templates\teachers\question_form.html" />
+    <Content Include="teachers\templates\teachers\quiz_list.html" />
+    <Content Include="teachers\templates\teachers\signup.html" />
+    <Content Include="teachers\templates\teachers\signup_or_login.html" />
+    <Content Include="teachers\templates\teachers\user_home.html" />
+    <Content Include="teachers\templates\teachers\add_course.html" />
+    <Content Include="teachers\templates\teachers\teachercourse_list.html" />
+    <Content Include="teachers\templates\teachers\teachercourse_form.html" />
+    <Content Include="teachers\templates\teachers\teachercourse_detail.html" />
+    <Content Include="teachers\templates\teachers\teachercourse_confirm_delete.html" />
+    <Content Include="teachers\templates\teachers\quiz_form.html" />
+    <Content Include="teachers\templates\teachers\quiz_detail.html" />
+    <Content Include="teachers\templates\teachers\question_list.html" />
+    <Content Include="templates\base.html" />
+    <Content Include="templates\home_page.html" />
+    <Content Include="templates\about_page.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="funLearning\" />
+    <Folder Include="static\images\" />
+    <Folder Include="students\" />
+    <Folder Include="students\migrations\" />
+    <Folder Include="students\templates\" />
+    <Folder Include="students\templates\students\" />
+    <Folder Include="teachers\" />
+    <Folder Include="teachers\migrations\" />
+    <Folder Include="teachers\templates\" />
+    <Folder Include="teachers\templates\teachers\" />
+    <Folder Include="templates\" />
+    <Folder Include="static\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|myDjangoEnv" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

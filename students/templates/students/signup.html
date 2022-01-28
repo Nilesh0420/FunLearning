@@ -1,0 +1,39 @@
+{% extends 'students/signup_or_login.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<style>
+
+    form {
+        padding: 0px 200px 0px 200px;
+    }
+
+    hr {
+        width: 800px;
+    }
+
+    #signup {
+        width: 100px;
+    }
+</style>
+
+<div class="container">
+<div class="container">
+<div class="jumbotron text-center h-100">
+    {% if registered %}
+        <h1>Thank you for signing up!</h1>
+    {% else %}
+        <h1>Sign up here!</h1>
+        <p>It's quick and easy!</p>
+        <hr class="my-4">
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input id="signup" type="submit" value="Sign Up" class="btn btn-info">
+        </form>
+    {% endif %}
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'teachers/user_home.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<style>
+
+    form {
+        padding: 0px 200px 0px 200px;
+    }
+
+    hr {
+        width: 800px;
+    }
+
+    input {
+        width: 100px;
+    }
+</style>
+
+<div class="container">
+    <div class="container">
+        <div class="jumbotron text-center h-100">
+            <h1>
+                {% if not form.instance.pk %}
+                Add a new question here!
+                {% else %}
+                Update the question here!
+                {% endif %}
+            </h1>
+            <hr class="my-4">
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% if not form.instance.pk %}
+                <input type="submit" class="btn btn-info" value="Add">
+                {% else %}
+                <input type="submit" class="btn btn-info" value="Update">
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

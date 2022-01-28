@@ -1,0 +1,236 @@
+{% extends 'teachers/user_home.html' %}
+{% block body_block %}
+    
+<body>
+
+    <style>
+        #my_jumbo {
+            border: 1px solid #d3d3d3;
+            background-color: #ede8e8;
+        }
+
+        #my_name {
+            border: 1px solid #d3d3d3;
+            background-color: #ede8e8;
+        }
+
+    </style>
+
+    <div class="container" id="my_jumbo">
+        <br />
+        <h1>Welcome to Fun Learning!</h1>
+        <h6>An adaptive learning platform where fun & learn go together..</h6>
+        <h6>Sign up today to enjoy all other features!</h6>
+        <br />
+        <h4>Till then feel free to enjoy this little game :P</h4>
+        <br />
+    </div>
+    <br />
+    <div class="alert alert-info" role="alert">
+        Instructions:<br />
+        Click the "start" button to start the game.<br />
+        Click on the provided direction buttons (UP, DOWN, LEFT & RIGHT) to move the red square.
+    </div>
+    <div class="alert alert-warning" role="alert">
+        You cannot use keyboard arrow buttons in this game! Work up buddy! :P
+    </div>
+
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+
+
+    <div id="myfilter" style="position: absolute;
+        background-color: rgb(0, 0, 0); opacity: 0.3; width: 322px; height: 182px;
+        display: block;">
+    </div>
+
+
+    <div id="myrestartbutton" style="position: absolute; padding-top: 75px;
+        padding-left: 120px; display: block;">
+        <button class="btn btn-warning" onclick="restartGame()">Start</button>
+    </div>
+
+    <div id="canvascontainer"><canvas width="320" height="180"></canvas></div>
+    <br />
+
+    <div style="text-align:center;width:320px;">
+        <button class="btn btn-dark" ontouchstart="moveup()" onmousedown="moveup()" onmouseup="clearmove()">UP</button><br><br>
+        <button class="btn btn-dark" ontouchstart="moveleft()" onmousedown="moveleft()" onmouseup="clearmove()">LEFT</button>
+        <button class="btn btn-dark" ontouchstart="moveright()" onmousedown="moveright()" onmouseup="clearmove()">RIGHT</button><br><br>
+        <button class="btn btn-dark" ontouchstart="movedown()" onmousedown="movedown()" onmouseup="clearmove()">DOWN</button>
+    </div>
+    <br />
+
+    <script>
+
+        var myGameArea;
+        var myGamePiece;
+        var myObstacles = [];
+        var myscore;
+
+        function restartGame() {
+            document.getElementById("myfilter").style.display = "none";
+            document.getElementById("myrestartbutton").style.display = "none";
+            myGameArea.stop();
+            myGameArea.clear();
+            myGameArea = {};
+            myGamePiece = {};
+            myObstacles = [];
+            myscore = {};
+            document.getElementById("canvascontainer").innerHTML = "";
+            startGame()
+        }
+
+        function startGame() {
+            myGameArea = new gamearea();
+            myGamePiece = new component(30, 30, "red", 10, 75);
+            myscore = new component("15px", "Consolas", "black", 220, 25, "text");
+            myGameArea.start();
+        }
+
+        function gamearea() {
+            this.canvas = document.createElement("canvas");
+            this.canvas.width = 320;
+            this.canvas.height = 180;
+            document.getElementById("canvascontainer").appendChild(this.canvas);
+            this.context = this.canvas.getContext("2d");
+            this.pause = false;
+            this.frameNo = 0;
+            this.start = function () {
+                this.interval = setInterval(updateGameArea, 20);
+            }
+            this.stop = function () {
+                clearInterval(this.interval);
+                this.pause = true;
+            }
+            this.clear = function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+            }
+        }
+
+        function component(width, height, color, x, y, type) {
+
+            this.type = type;
+            if (type == "text") {
+                this.text = color;
+            }
+            this.score = 0; this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.x = x;
+            this.y = y;
+            this.update = function () {
+                ctx = myGameArea.context;
+                if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.fillText(this.text, this.x, this.y);
+                } else {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            }
+            this.crashWith = function (otherobj) {
+                var myleft = this.x;
+                var myright = this.x + (this.width);
+                var mytop = this.y;
+                var mybottom = this.y + (this.height);
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.height);
+                var crash = true;
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+            }
+        }
+
+        function updateGameArea() {
+            var x, y, min, max, height, gap;
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    myGameArea.stop();
+                    document.getElementById("myfilter").style.display = "block";
+                    document.getElementById("myrestartbutton").style.display = "block";
+                    return;
+                }
+            }
+            if (myGameArea.pause == false) {
+                myGameArea.clear();
+                myGameArea.frameNo += 1;
+                myscore.score += 1;
+                if (myGameArea.frameNo == 1 || everyinterval(150)) {
+                    x = myGameArea.canvas.width;
+                    y = myGameArea.canvas.height - 100;
+                    min = 20;
+                    max = 100;
+                    height = Math.floor(Math.random() * (max - min + 1) + min);
+                    min = 50;
+                    max = 100;
+                    gap = Math.floor(Math.random() * (max - min + 1) + min);
+                    myObstacles.push(new component(10, height, "green", x, 0));
+                    myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+                }
+                for (i = 0; i < myObstacles.length; i += 1) {
+                    myObstacles[i].x += -1;
+                    myObstacles[i].update();
+                }
+                myscore.text = "SCORE: " + myscore.score;
+                myscore.update();
+                myGamePiece.x += myGamePiece.speedX;
+                myGamePiece.y += myGamePiece.speedY;
+                myGamePiece.update();
+            }
+        }
+
+        function everyinterval(n) {
+            if ((myGameArea.frameNo / n) % 1 == 0) { return true; }
+            return false;
+        }
+
+        function moveup(e) {
+            myGamePiece.speedY = -1;
+        }
+
+        function movedown() {
+            myGamePiece.speedY = 1;
+        }
+
+        function moveleft() {
+            myGamePiece.speedX = -1;
+        }
+
+        function moveright() {
+            myGamePiece.speedX = 1;
+        }
+
+        function clearmove(e) {
+            myGamePiece.speedX = 0;
+            myGamePiece.speedY = 0;
+        }
+        document.getElementById("canvascontainer").innerHTML = "";
+        startGame();
+
+    </script>
+    <br />
+    <br />
+    <div class="container" id="my_name">
+        <br />
+        <h3>Nbyula Round 2 Assignment</h3>
+        <br />
+        <h5>Made by: Nilesh Ranjan <br /> Contact : n.ranjan1318@gmail.com <br /></h5>
+        <br />
+    </div>
+    <br />
+    <br />
+</body>
+
+{% endblock %}

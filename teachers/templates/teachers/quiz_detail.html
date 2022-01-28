@@ -1,0 +1,37 @@
+{% extends 'teachers/user_home.html' %}
+{% block body_block %}
+<style>
+    hr {
+        width: 800px;
+    }
+
+    .jumbotron {
+        margin-bottom: 12px;
+        padding-bottom: 50px;
+    }
+
+    #90 {
+        width: 90px;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+</style>
+<div class="container">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Quiz details!</h1>
+            <hr align="left" class="my-4">
+            <p>
+                <b>Quiz for course:</b> {{ quiz_details.course.course_name }}<br />
+                <b>Quiz name:</b> {{ quiz_details.quiz_name }}<br />
+                <b>Quiz description:</b> {{ quiz_details.desc }}<br />
+                <b>Number of questions:</b> {{ quiz_details.number_of_questions }}<br />
+                <b>Time alloted (in seconds):</b> {{ quiz_details.time }}<br />
+            </p>
+        </div>
+        <a href="{% url 'teachers:ques_list' %}"><input type="button" value="View questions" class="btn btn-info"></a>
+    </div>
+</div>
+{% endblock %}

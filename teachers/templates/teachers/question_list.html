@@ -1,0 +1,33 @@
+{% extends 'teachers/user_home.html' %}
+{% block body_block %}
+<style>
+    #130 {
+        width: 130px;
+    }
+
+    .jumbotron {
+        margin-bottom: 12px;
+    }
+</style>
+<div class="container">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Here is a list of all questions for this quiz!</h1>
+            <hr class="my-4">
+            <a id="130" class="btn btn-info" href="{% url 'teachers:ques_add' %}">Add Question</a>
+        </div>
+        <ol>
+                {% for ques in questions %}
+                {% if ques.quiz.course.teacher.username == user.get_username and ques.quiz.course.teacher.is_teacher == True %}
+                <p><li><a href="{% url 'teachers:ques_detail' pk=ques.pk %}">{{ ques.ques }}</a></li></p>
+                {% endif %}
+                {% endfor %}
+        </ol>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+

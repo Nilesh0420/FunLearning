@@ -1,0 +1,31 @@
+{% extends 'teachers/user_home.html' %}
+{% block body_block %}
+<style>
+    hr {
+        width: 800px;
+    }
+
+    .jumbotron {
+        margin-bottom: 12px;
+        padding-bottom: 50px;
+    }
+
+    .btn {
+        margin-bottom: 12px;
+        width: 90px;
+    }
+</style>
+<div class="container">
+<div class="container">
+    <div class="jumbotron">
+        <h1>Delete "{{ course.course_name }}"?</h1>
+        <p>Double check the course name before deleting!</p>
+    </div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete">
+        </form> 
+        <a href="{% url "teachers:course_list" %}"><input type="submit" class="btn btn-info" value="Cancel"></a>
+</div>
+</div>
+{% endblock %}

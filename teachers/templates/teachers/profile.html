@@ -1,0 +1,42 @@
+{% extends 'teachers/user_home.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+<style>
+    hr {
+        width: 600px;
+        align-content: center;
+    }
+
+    .header {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .p {
+        text-align: center;
+        border: 1px black solid;
+        margin: 0px 300px 0px 300px;
+        background-color: white;
+        border-radius: 2px;
+        padding: 3px 0px 3px 0px;
+    }
+</style>
+<div class="container">
+    <div class="container">
+        <div class="jumbotron h-100">
+            <h1 class="header">My Profile!</h1>
+            <hr class="my-4">
+            <p class="header">Full Name</p>
+            <p class="p"> {{ user.first_name }} {{ user.last_name }} </p>
+            <p class="header">Username</p>
+            <p class="p"> {{ user.get_username }} </p>
+            <p class="header">Email ID</p>
+            <p class="p"> {{ user.email }} </p>
+            <p class="header">Logged in as</p>
+            <p class="p"> Teacher </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

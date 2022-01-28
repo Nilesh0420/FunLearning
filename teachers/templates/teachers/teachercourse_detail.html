@@ -1,0 +1,33 @@
+{% extends 'teachers/user_home.html' %}
+{% block body_block %}
+<style>
+    hr {
+        width: 800px;
+    }
+
+    .jumbotron {
+        margin-bottom: 12px;
+        padding-bottom: 50px;
+    }
+
+    #90 {
+        width: 90px;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+</style>
+<div class="container">
+<div class="container">
+<div class="jumbotron">
+    <h1>Course details!</h1>
+    <hr align="left" class="my-4">
+    <p>Course name: {{ course_details.course_name }}<br />
+       Created created by: {{ course_details.teacher.first_name }} {{ course_details.teacher.last_name }}</p>
+</div>
+    <a id="90" class="btn btn-warning" href="{% url 'teachers:course_update' pk=course_details.pk %}">Update</a>
+    <a id="90" class="btn btn-danger" href="{% url 'teachers:course_delete' pk=course_details.pk %}">Delete</a>
+</div>
+</div>
+{% endblock %}

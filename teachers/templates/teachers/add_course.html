@@ -1,0 +1,15 @@
+{% extends 'teachers/user_home.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="jumbotron">
+    <h1>Add a new course here!</h1>
+    <h3>Fill the details: </h3>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Add" class="btn btn-info">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
